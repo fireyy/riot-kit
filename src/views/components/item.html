@@ -1,0 +1,12 @@
+<item>
+  <span class="bold" show={ itemdata.tag }>{ itemdata.tag }</span>
+  <span class="fr">{ itemdata.date }</span>
+  <a href="#view-new/{ itemdata.id }">{ itemdata.title }</a>
+  <script>
+  var self = this
+  self.itemdata = opts.data
+  showTag() {
+    return self.itemdata.tag !== undefined
+  }
+  </script>
+</item>

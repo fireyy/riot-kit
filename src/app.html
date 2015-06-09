@@ -1,0 +1,43 @@
+<app>
+  <div class="header">
+    <h1>Riot Kit Demo</h1>
+  </div>
+  <div id="wrap"></div>
+  <modal modal="{ modalOptions }"></modal>
+  <script>
+  var self = this
+  self.currentView = null
+  loadView(viewName, id) {
+    var parms;
+    if (id) {
+      parms = { data: id };
+    }
+    if (self.currentView) {
+      self.currentView.unmount(true)
+    }
+    self.currentView = riot.mount('div#wrap', viewName, parms)[0]
+  }
+  appRoute(view, id) {
+    switch(view) {
+      case '':
+        require('./views/index.html')
+        self.loadView('index')
+        break
+      case 'lottery':
+        require('./views/lottery.html')
+        self.loadView('lottery')
+        break
+      case 'view-new':
+        require('./views/view-new.html')
+        self.loadView('view-new', id)
+        break
+      default:
+        riot.route('')
+    }
+  }
+  riot.route(self.appRoute)
+  this.on('mount', function() {
+    riot.route.exec(self.appRoute)
+  })
+  </script>
+</app>

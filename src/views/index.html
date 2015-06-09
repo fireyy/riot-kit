@@ -1,0 +1,43 @@
+<index>
+  <div class="landing">
+    <a class="intro-btn" onclick={showIntro}>活动说明</a>
+    <button type="button" onclick={gotoLottery}>抽奖</button>
+  </div>
+  <div class="news">
+    <ul>
+      <li class="item" each={ i, item in news }>
+        <item data={ item }></item>
+      </li>
+    </ul>
+  </div>
+  <script>
+  require('./components/item.html')
+  var store = require('../store')
+  var self = this
+  self.news = {}
+
+  fetchNews() {
+    store.fetchNews(function (items) {
+      self.news = items
+      self.update()
+    })
+  }
+
+  self.on('mount', function() {
+    self.fetchNews()
+    store.on('update', self.fetchNews)
+  })
+
+  self.on('unmount', function() {
+    store.removeListener('update', self.fetchNews)
+  })
+
+  gotoLottery() {
+    riot.route('lottery');
+  }
+
+  showIntro() {
+    //
+  }
+  </script>
+</index>

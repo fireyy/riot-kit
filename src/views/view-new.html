@@ -1,0 +1,20 @@
+<view-new>
+  <h1>{ itemdata.title }</h1>
+  <div class="meta">
+    <span class="bold" show={ itemdata.tag }>{ itemdata.tag } | </span>
+    <span class="date">{ itemdata.date }</span>
+  </div>
+  <div class="content">
+    { itemdata.content }
+  </div>
+  <script>
+  var store = require('../store')
+  var self = this
+  self.itemdata = null
+
+  store.fetchNew(opts.data, function (item) {
+    self.itemdata = item
+    self.update()
+  })
+  </script>
+</view-new>
