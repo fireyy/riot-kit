@@ -3,7 +3,6 @@
     <h1>Riot Kit Demo</h1>
   </div>
   <div id="wrap"></div>
-  <modal modal="{ modalOptions }"></modal>
   <script>
   var self = this
   self.currentView = null
@@ -19,7 +18,7 @@
   }
   appRoute(view, id) {
     switch(view) {
-      case '':
+      case 'index':
         require('./views/index.html')
         self.loadView('index')
         break
@@ -32,7 +31,7 @@
         self.loadView('view-new', id)
         break
       default:
-        riot.route('')
+        riot.route('index')
     }
   }
   riot.route(self.appRoute)

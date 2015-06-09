@@ -1,5 +1,11 @@
-<modal>
-  <div class="modal">
+<raw>
+  <span></span>
+  <script>
+  this.root.innerHTML = opts.content
+  </script>
+</raw>
+<jk-modal>
+  <div class="modal-wrap">
     <div class="overlay" if="{ opts.modal.visible }" onclick="{ close }"></div>
     <div class="modal" if="{ opts.modal.visible }">
       <header class="header">
@@ -8,7 +14,7 @@
         </button>
         <h3 class="heading">{ opts.modal.heading }</h3>
       </header>
-      <div class="body"> <yield></yield> </div>
+      <div class="body"><raw content="{ opts.modal.body }"/></div>
       <footer class="footer">
         <button class="button" each="{ opts.modal.buttons }" type="button" onclick="{ action }" riot-style="{ style }"> { text } </button>
       </footer>
@@ -16,11 +22,11 @@
   </div>
   <script>
   var self = this;
-  self.close = function (e) {
+  close(e) {
 		opts.modal.visible = false;
 		if (opts.modal.onclose) {
 			opts.modal.onclose(e);
 		}
 	};
   </script>
-</modal>
+</jk-modal>

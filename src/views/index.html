@@ -1,7 +1,7 @@
 <index>
   <div class="landing">
-    <a class="intro-btn" onclick={showIntro}>活动说明</a>
-    <button type="button" onclick={gotoLottery}>抽奖</button>
+    <button class="intro-btn" type="button" onclick={showIntro}>活动说明</button>
+    <button class="lottery-btn" type="button" onclick={gotoLottery}>抽奖</button>
   </div>
   <div class="news">
     <ul>
@@ -10,11 +10,15 @@
       </li>
     </ul>
   </div>
+  <jk-modal modal="{ modal }"></jk-modal>
   <script>
   require('./components/item.html')
+  require('./components/jk-modal.html')
+
   var store = require('../store')
   var self = this
   self.news = {}
+  self.modal = {}
 
   fetchNews() {
     store.fetchNews(function (items) {
@@ -24,6 +28,14 @@
   }
 
   self.on('mount', function() {
+    self.modal = {
+  		heading: '活动说明',
+  		visible: false,
+      body: '',
+  		buttons: [
+  			{ action: function () { self.modal.visible = false; }, text: 'Ok', style: 'color: white; background-color: #1fadc5; border-radius: 3px;' }
+  		]
+  	}
     self.fetchNews()
     store.on('update', self.fetchNews)
   })
@@ -37,7 +49,8 @@
   }
 
   showIntro() {
-    //
+    self.modal.body = "<p>活动说明1</p><p>活动说明2</p><p>活动说明3</p><p>活动说明4</p>"
+    self.modal.visible = true
   }
   </script>
 </index>
