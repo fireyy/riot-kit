@@ -18,7 +18,7 @@
   }
   appRoute(view, id) {
     switch(view) {
-      case 'index':
+      case '':
         require('./views/index.html')
         self.loadView('index')
         break
@@ -31,7 +31,7 @@
         self.loadView('view-new', id)
         break
       default:
-        riot.route('index')
+        riot.route('')
     }
   }
   riot.route(self.appRoute)

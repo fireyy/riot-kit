@@ -10,15 +10,21 @@
       </li>
     </ul>
   </div>
-  <jk-modal modal="{ modal }"></jk-modal>
+  <rg-modal modal="{ modal }"><p>活动说明1</p><p>活动说明2</p><p>活动说明3</p><p>活动说明4</p></rg-modal>
+  <rg-loading show="{ loading }">
+		Please wait...
+	</rg-loading>
   <script>
   require('./components/item.html')
-  require('./components/jk-modal.html')
+  require('./components/rg-modal.html')
+  require('./components/rg-loading.html')
 
   var store = require('../store')
   var self = this
   self.news = {}
   self.modal = {}
+  self.loading = false
+  self.body = ""
 
   fetchNews() {
     store.fetchNews(function (items) {
@@ -45,11 +51,14 @@
   })
 
   gotoLottery() {
-    riot.route('lottery');
+    self.loading = true
+    setTimeout(function(){
+      self.loading = false
+      riot.route('lottery');
+    },3000)
   }
 
   showIntro() {
-    self.modal.body = "<p>活动说明1</p><p>活动说明2</p><p>活动说明3</p><p>活动说明4</p>"
     self.modal.visible = true
   }
   </script>
