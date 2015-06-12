@@ -3,40 +3,51 @@
     <h1>Riot Kit Demo</h1>
   </div>
   <div id="wrap"></div>
-  <script>
-  var self = this
-  self.currentView = null
-  loadView(viewName, id) {
+  <rg-loading data={loading}></rg-loading>
+  <rg-modal data={modal}></rg-modal>
+  <script type="es6">
+  this.currentView = null
+  this.loading = {}
+  this.modal = {}
+
+  riot.control.on(riot.SE.LOADING_CHANGE, loading => {
+    this.loading = loading
+    this.update()
+  })
+
+  riot.control.on(riot.SE.MODAL_CHANGE, modal => {
+    this.modal = modal
+    this.update()
+  })
+
+  loadView = (viewName, id) => {
     var parms;
     if (id) {
       parms = { data: id };
     }
-    if (self.currentView) {
-      self.currentView.unmount(true)
+    if (this.currentView) {
+      this.currentView.unmount(true)
     }
-    self.currentView = riot.mount('div#wrap', viewName, parms)[0]
+    this.currentView = riot.mount('div#wrap', viewName, parms)[0]
   }
-  appRoute(view, id) {
+  appRoute = (view, id) => {
     switch(view) {
       case '':
-        require('./views/index.html')
-        self.loadView('index')
+        loadView('index')
         break
       case 'lottery':
-        require('./views/lottery.html')
-        self.loadView('lottery')
+        loadView('lottery')
         break
       case 'view-new':
-        require('./views/view-new.html')
-        self.loadView('view-new', id)
+        loadView('view-new', id)
         break
       default:
         riot.route('')
     }
   }
-  riot.route(self.appRoute)
-  this.on('mount', function() {
-    riot.route.exec(self.appRoute)
+  riot.route(appRoute)
+  this.on('mount', () => {
+    riot.route.exec(appRoute)
   })
   </script>
 </app>

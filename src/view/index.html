@@ -1,0 +1,75 @@
+<index>
+  <div class="landing">
+    <button class="intro-btn" type="button" onclick={showIntro}>活动说明</button>
+    <button class="lottery-btn" type="button" onclick={gotoLottery}>抽奖</button>
+    <button class="test-btn" type="button" onclick={showLoading}>Loading</button>
+  </div>
+  <div class="news">
+    <ul>
+      <li class="item" each={ item,i in news }>
+        <item data={ item }></item>
+      </li>
+    </ul>
+  </div>
+  <script type="es6">
+  this.news = []
+
+  this.showLoading = () => {
+    let _loading = {
+      visible: true,
+      text: "Please Waiting..."
+    }
+    riot.control.trigger(riot.VE.TOGGLE_LOADING, _loading)
+  }
+
+  this.showIntro = () => {
+    let _modal = {
+      heading: '活动说明1',
+      visible: true,
+      body: '<p>活动说明1</p><p>活动说明2</p><p>活动说明3</p><p>活动说明4</p>',
+      buttons: [
+        { action: function () {  }, text: 'Ok', style: 'color: white; background-color: #1fadc5; border-radius: 3px;' }
+      ]
+    }
+    riot.control.trigger(riot.VE.TOGGLE_MODAL, _modal)
+  }
+
+  this.fetchNews = () => {
+    this.news = [
+      {
+        "id": 1,
+        "title": "测试公告1",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容1"
+      },
+      {
+        "id": 2,
+        "title": "测试公告2",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容2"
+      },
+      {
+        "id": 3,
+        "title": "测试公告3",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容3"
+      },
+      {
+        "id": 4,
+        "title": "测试公告4",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容444444"
+      }
+    ]
+    this.update()
+  }
+
+  this.on('mount', function() {
+    this.fetchNews()
+  })
+
+  this.gotoLottery = () => {
+    riot.route('lottery');
+  }
+  </script>
+</index>

@@ -1,33 +1,36 @@
 <rg-modal>
 
-	<div class="overlay" if="{ opts.modal.visible }" onclick="{ close }"></div>
-	<div class="modal" if="{ opts.modal.visible }">
+	<div class="overlay" if="{ opts.data.visible }" onclick="{ close }"></div>
+	<div class="modal" if="{ opts.data.visible }">
 		<header class="header">
 			<button type="button" class="close" aria-label="Close" onclick="{ close }">
 				<span aria-hidden="true">&times;</span>
 			</button>
-			<h3 class="heading">{ opts.modal.heading }</h3>
+			<h3 class="heading">{ opts.data.heading }</h3>
 		</header>
 
 		<div class="body">
-			<raw-html danger={ commentRawMarkup } />
+			<raw-html danger={ opts.data.body } />
 		</div>
 
 		<footer class="footer">
-			<button class="button" each="{ opts.modal.buttons }" type="button" onclick="{ action }" style="{ style }">
+			<button class="button" each="{ opts.data.buttons }" type="button" onclick="{ action }" style="{ style }">
 				{ text }
 			</button>
 		</footer>
 	</div>
 
-	<script>
-	require('./raw-html.html')
-
-	var _this = this;
-	_this.close = function (e) {
-		opts.modal.visible = false;
-		if (opts.modal.onclose) {
-			opts.modal.onclose(e);
+	<script type="es6">
+	this.buttonAction = (action) => {
+		opts.data.visible = false
+		if(action){
+			action()
+		}
+	}
+	this.close = (e) => {
+		opts.data.visible = false
+		if (opts.data.onclose) {
+			opts.data.onclose(e)
 		}
 	};
 	</script>

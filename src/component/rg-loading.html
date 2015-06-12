@@ -1,9 +1,9 @@
 <rg-loading>
 
-	<div class="overlay"></div>
-	<div class="loading">
+	<div class="overlay" if="{ opts.data.visible }"></div>
+	<div class="loading" if="{ opts.data.visible }">
 		<div>
-			<yield/>
+			{opts.data.text}
 		</div>
 		<div>
 			<svg width='80px' height='80px' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="uil-default">
@@ -19,7 +19,6 @@
 			</svg>
 		</div>
 	</div>
-
 	<style scoped>
 
 		.overlay {

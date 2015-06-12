@@ -1,3 +1,5 @@
-require('./lib/zepto.custom.js')
-require('./app.html')
-require('riot').mount('app')
+import './dispatcher.js'
+import './store.js'
+import './tags.js'
+
+riot.mount('app')
