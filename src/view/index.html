@@ -34,38 +34,13 @@
     riot.control.trigger(riot.VE.TOGGLE_MODAL, _modal)
   }
 
-  this.fetchNews = () => {
-    this.news = [
-      {
-        "id": 1,
-        "title": "测试公告1",
-        "data": 1433829726246,
-        "content": "测试公告内容，测试公告内容1"
-      },
-      {
-        "id": 2,
-        "title": "测试公告2",
-        "data": 1433829726246,
-        "content": "测试公告内容，测试公告内容2"
-      },
-      {
-        "id": 3,
-        "title": "测试公告3",
-        "data": 1433829726246,
-        "content": "测试公告内容，测试公告内容3"
-      },
-      {
-        "id": 4,
-        "title": "测试公告4",
-        "data": 1433829726246,
-        "content": "测试公告内容，测试公告内容444444"
-      }
-    ]
-    this.update()
-  }
+  this.on('mount', () => {
+    riot.control.trigger(riot.VE.LOAD_NEWS)
+  })
 
-  this.on('mount', function() {
-    this.fetchNews()
+  riot.control.on(riot.SE.NEWS_CHANGE, posts => {
+    this.news = posts
+    this.update()
   })
 
   this.gotoLottery = () => {

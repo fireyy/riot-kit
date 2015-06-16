@@ -1,5 +1,5 @@
 import './dispatcher.js'
-import './store.js'
+import './stores.js'
 import './tags.js'
 
 riot.mount('app')

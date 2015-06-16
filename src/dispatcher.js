@@ -16,7 +16,8 @@ _RiotControlApi.forEach(api => {
 riot.control = RiotControl
 riot.SE = {
   LOADING_CHANGE: 'LOADING_CHANGE',
-  MODAL_CHANGE: 'MODAL_CHANGE'
+  MODAL_CHANGE: 'MODAL_CHANGE',
+  NEWS_CHANGE: 'NEWS_CHANGE'
 }
 riot.VE = {
   TOGGLE_LOADING: 'TOGGLE_LOADING',

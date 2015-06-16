@@ -13,17 +13,35 @@ class NewStore {
   }
 
   getNewById(id) {
-    return this._posts.filter(p => p.postId == id)[0]
+    return this._posts.filter(p => p.id == id)[0]
   }
 
   initData() {
     let defaultPosts = [
-      {postId: 1, title: 'Best xbox games', content: 'Halo, GOW', category: 'collection', likes: 10},
-      {postId: 2, title: 'Best ps games', content: 'Uncharted, The Last of US', category: 'collection', likes: 20},
-      {postId: 3, title: 'Best wii games', content: 'Zelda, Mario', category: 'collection', likes: 16},
-      {postId: 4, title: 'Review of Halo', content: 'yes, cortana', category: 'review', likes: 11},
-      {postId: 5, title: 'Review of Titanfall', content: 'where is the local game?', category: 'review', likes: 7},
-      {postId: 6, title: 'Review of portal', content: 'I don\'t blame you', category: 'review', likes: 40},
+      {
+        "id": 1,
+        "title": "测试公告1",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容1"
+      },
+      {
+        "id": 2,
+        "title": "测试公告2",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容2"
+      },
+      {
+        "id": 3,
+        "title": "测试公告3",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容3"
+      },
+      {
+        "id": 4,
+        "title": "测试公告4",
+        "data": 1433829726246,
+        "content": "测试公告内容，测试公告内容444444"
+      }
     ]
     this._posts = defaultPosts
     this.saveToStorage()
@@ -36,23 +54,8 @@ class NewStore {
 
 let instance = new NewStore()
 
-instance.on(riot.VE.LOAD_POSTS, () => {
-  instance.trigger(riot.SE.POSTS_CHANGED, instance._posts)
-})
-
-instance.on(riot.VE.RESET_DATA, () => {
-  instance.initData()
-  instance.trigger(riot.SE.POSTS_CHANGED, instance._posts)
-})
-
-instance.on(riot.VE.LIKE_POST, id => {
-  instance._posts.forEach(p => {
-    if (p.postId == id) {
-      p.likes = p.likes + 1
-    }
-  })
-  instance.saveToStorage()
-  instance.trigger(riot.SE.POSTS_CHANGED, instance._posts)
+instance.on(riot.VE.LOAD_NEWS, () => {
+  instance.trigger(riot.SE.NEWS_CHANGE, instance._posts)
 })
 
 // register to riot control by myself
