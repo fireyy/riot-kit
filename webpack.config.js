@@ -1,4 +1,4 @@
-var webpack = require('webpack')
+var webpack = require('webpack');
 
 module.exports = {
     cache: true,
@@ -7,8 +7,6 @@ module.exports = {
       vendor: './src/lib.js',
     },
     output: {
-        path: './dist/',
-        publicPath: '/dist/',
         filename: 'app.js'
     },
     module: {
@@ -22,10 +20,9 @@ module.exports = {
       new webpack.ProvidePlugin({
         riot: 'riot'
       }),
-      new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"lib.js")
+      new webpack.optimize.CommonsChunkPlugin("vendor", "lib.js")
     ],
     devServer: {
         port: 5555
-    },
-    devtool: "source-map"
+    }
 }
